@@ -22,6 +22,8 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 
 gem 'bower-rails'
+gem 'angular-rails-templates'
+
 gem "foreman"
 group :production, :staging do
   gem "rails_12factor"
