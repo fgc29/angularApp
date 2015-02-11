@@ -1,5 +1,5 @@
-Rails.application.routes.draw do
-  get 'home/index'
-
+Receta::Application.routes.draw do
   root 'home#index'
+
+  resources :recipes, only: [:index]
 end

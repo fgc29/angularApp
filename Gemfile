@@ -30,14 +30,17 @@ group :production, :staging do
   gem "rails_stdout_logging"
   gem "rails_serve_static_assets"
 end
-# gem 'sass', '3.2.19'
+gem 'sass', '3.2.19'
 group :test, :development do
+  gem "pry-rails"
   gem "rspec"
   gem "rspec-rails", "~> 2.0"
   gem "factory_girl_rails", "~> 4.0"
   gem "capybara"
   gem "database_cleaner"
-  gem "selenium-webdriver"
+  gem "selenium-webdriver", '>=2.45.0.dev3'
+  gem 'teaspoon'
+  gem 'phantomjs'
 end
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
