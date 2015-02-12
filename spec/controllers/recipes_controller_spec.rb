@@ -68,6 +68,7 @@ describe RecipesController do
       it { expect(response.status).to eq(404) }
     end
   end
+
   describe "create" do
     before do
       xhr :post, :create, format: :json, recipe: { name: "Toast", instructions: "Add bread to toaster, push lever" }

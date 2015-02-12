@@ -13,7 +13,7 @@ describe "RecipeController", ->
     instructions: "Pierce potato with fork, nuke for 20 minutes"
 
   setupController =(recipeExists=true,recipeId=42)->
-    inject(($location, $routeParams, $rootScope, $httpBackend, $controller,_flash_)->
+    inject(($location, $routeParams, $rootScope, $httpBackend, $controller, _flash_)->
       scope       = $rootScope.$new()
       location    = $location
       httpBackend = $httpBackend
@@ -25,12 +25,13 @@ describe "RecipeController", ->
         request = new RegExp("\/recipes/#{recipeId}")
         results = if recipeExists
           [200,fakeRecipe]
-      else
-        [404]
+        else
+          [404]
 
-      httpBackend.expectGET(request).respond(results[0],results[1])
+        httpBackend.expectGET(request).respond(results[0],results[1])
 
-      ctrl = $controller('RecipeController', $scope: scope)
+      ctrl        = $controller('RecipeController',
+                                $scope: scope)
     )
 
   beforeEach(module("receta"))
@@ -38,7 +39,6 @@ describe "RecipeController", ->
   afterEach ->
     httpBackend.verifyNoOutstandingExpectation()
     httpBackend.verifyNoOutstandingRequest()
-
   describe 'controller initialization', ->
     describe 'recipe is found', ->
       beforeEach(setupController())
@@ -50,7 +50,6 @@ describe "RecipeController", ->
       it 'loads the given recipe', ->
         httpBackend.flush()
         expect(scope.recipe).toBe(null)
-        # what else?!
         expect(flash.error).toBe("There is no recipe with ID #{recipeId}")
 
   describe 'create', ->
@@ -99,4 +98,3 @@ describe "RecipeController", ->
     it 'posts to the backend', ->
       scope.delete()
       httpBackend.flush()
-      expect(location.path()).toBe("/")
